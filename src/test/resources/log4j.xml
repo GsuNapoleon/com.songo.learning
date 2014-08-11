@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	
+	<appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<param name="encoding" value="utf-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{HH:mm:ss:SSS} [%-4r] [%t] %p %l %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- 按天日志可以作为监控日志,按实际日期,每天一个文件 -->
+	<appender name="DailyFILE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="encoding" value="utf-8" />
+		<!-- 设置File参数：日志输出文件名 -->
+		<param name="File"
+			value="D:\\DevelopmentEnvironment\\logs\\com.songo.gather\\gather.log" />
+		<!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- 设置输出文件项目和格式 -->
+			<param name="ConversionPattern" value="%d{HH:mm:ss:SSS} [%-4r] [%t] %p %l %m%n" />
+		</layout>
+		<!--滤镜设置输出的级别 -->
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<!-- 输出监控日志的时候需要配合使用过滤器,这里配置使用info -->
+			<param name="levelMin" value="DEBUG" />
+			<param name="levelMax" value="FATAL" />
+			<param name="AcceptOnMatch" value="true" />
+		</filter>
+	</appender>
+	<root>
+		<priority value="debug" />
+		<appender-ref ref="ConsoleAppender" />
+		<appender-ref ref="DailyFILE" />
+	</root>
+</log4j:configuration>
