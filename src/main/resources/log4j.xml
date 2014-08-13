@@ -25,7 +25,7 @@
 		<!--滤镜设置输出的级别 -->
 		<filter class="org.apache.log4j.varia.LevelRangeFilter">
 			<!-- 输出监控日志的时候需要配合使用过滤器,这里配置使用info -->
-			<param name="levelMin" value="DEBUG" />
+			<param name="levelMin" value="TRACE" />
 			<param name="levelMax" value="FATAL" />
 			<param name="AcceptOnMatch" value="true" />
 		</filter>
